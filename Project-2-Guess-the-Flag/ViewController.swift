@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var countries = [String]()
     var score = 0
     var correctAnswer = 0
+    var noOfQuestionsAsked = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +30,23 @@ class ViewController: UIViewController {
         if (sender.tag == correctAnswer) {
             title = "Correct"
             score += 1
+            showAlert(message: "Your score is \(score)")
         } else {
             title = "Wrong"
             score += -1
+            showAlert(message: "Wrong, that's the flag of \(countries[correctAnswer].uppercased()) your score is \(score), ")
         }
         
-        showAlert()
+        if noOfQuestionsAsked == 2 {
+            
+            score = 0
+            noOfQuestionsAsked = 0
+        }
         
     }
     
     func askQuestion(action: UIAlertAction! = nil) {
+        noOfQuestionsAsked += 1
         countries.shuffle()
         
         correctAnswer = Int.random(in: 0...2)
@@ -47,7 +55,7 @@ class ViewController: UIViewController {
         button2.setImage(UIImage(named: countries[1]), for: .normal)
         button3.setImage(UIImage(named: countries[2]), for: .normal)
         
-        title = countries[correctAnswer].uppercased()
+        title = "\(countries[correctAnswer].uppercased()) - Score: \(score)"
 
     }
     
@@ -60,8 +68,8 @@ class ViewController: UIViewController {
         button3.layer.borderColor = UIColor.gray.cgColor
     }
     
-    func showAlert() {
-        let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
+    func showAlert(message: String ) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
         
