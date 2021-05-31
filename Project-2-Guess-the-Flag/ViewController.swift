@@ -25,8 +25,20 @@ class ViewController: UIViewController {
         askQuestion()
 
     }
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        if (sender.tag == correctAnswer) {
+            title = "Correct"
+            score += 1
+        } else {
+            title = "Wrong"
+            score += -1
+        }
+        
+        showAlert()
+        
+    }
     
-    func askQuestion() {
+    func askQuestion(action: UIAlertAction! = nil) {
         countries.shuffle()
         
         correctAnswer = Int.random(in: 0...2)
@@ -46,6 +58,14 @@ class ViewController: UIViewController {
         button2.layer.borderColor = UIColor(red: 1.0, green: 0.9, blue: 0.2, alpha: 1.0).cgColor
         button3.layer.borderWidth = 1
         button3.layer.borderColor = UIColor.gray.cgColor
+    }
+    
+    func showAlert() {
+        let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
+        
+        ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
+        
+        present(ac, animated: true, completion: nil)
     }
 
 
