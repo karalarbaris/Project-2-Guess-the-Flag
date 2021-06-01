@@ -30,11 +30,11 @@ class ViewController: UIViewController {
         if (sender.tag == correctAnswer) {
             title = "Correct"
             score += 1
-            showAlert(message: "Your score is \(score)")
+            showAlert(message: "Your score is \(score)", title: title!)
         } else {
             title = "Wrong"
             score += -1
-            showAlert(message: "Wrong, that's the flag of \(countries[correctAnswer].uppercased()) your score is \(score), ")
+            showAlert(message: "Wrong, that's the flag of \(countries[correctAnswer].uppercased()) your score is \(score), ", title: title!)
         }
         
         if noOfQuestionsAsked == 2 {
@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         button3.layer.borderColor = UIColor.gray.cgColor
     }
     
-    func showAlert(message: String ) {
+    func showAlert(message: String, title: String ) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
@@ -76,6 +76,15 @@ class ViewController: UIViewController {
         present(ac, animated: true, completion: nil)
     }
 
-
+    @IBAction func showScoreTapped(_ sender: UIBarButtonItem) {
+        
+        showAlert(message: "Current score is \(score)", title: "")
+        
+        
+//        let vc = UIActivityViewController(activityItems: ["Current score is \(score)"], applicationActivities: [])
+//        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+//        present(vc, animated: true, completion: nil)
+    }
+    
 }
 

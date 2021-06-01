@@ -49,7 +49,13 @@
                             <constraint firstItem="TBl-iF-mib" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gQu-tL-gR5"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="P26-WS-c6y"/>
+                    <navigationItem key="navigationItem" id="P26-WS-c6y">
+                        <barButtonItem key="rightBarButtonItem" title="Show Score" id="e9D-Bc-chm">
+                            <connections>
+                                <action selector="showScoreTapped:" destination="BYZ-38-t0r" id="7YP-yL-iFW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="button1" destination="TBl-iF-mib" id="oBy-je-fDq"/>
                         <outlet property="button2" destination="14e-f5-ybx" id="K67-2N-3De"/>
